@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <header
-      className={`border-gray4 w-full  fixed left-0 top-0 z-20 ${
+      className={`border-gray4 w-full fixed left-0 top-0 z-20 ${
         homepage ? "bg-[#F1F6FF] border-none" : "bg-white border-b"
       }`}
     >
