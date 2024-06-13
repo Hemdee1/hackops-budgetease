@@ -12,7 +12,7 @@ const Page = () => {
   const handleSubmit = () => {};
 
   return (
-    <div className="py-24 bg-white text-black">
+    <div className="py-24">
       <AuthHeader />
 
       <div className="w-[600px] mt-20 max-w-full mx-auto border-gray4 border  rounded-3xl px-5 sm:px-10 py-8">
