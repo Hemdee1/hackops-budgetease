@@ -24,14 +24,6 @@ export default function Home() {
             Create free account
           </Link>
         </div>
-        <Image
-          src="/images/hero2.png"
-          alt="hero image"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-[600px] h-auto"
-        />
       </div>
     </main>
   );
