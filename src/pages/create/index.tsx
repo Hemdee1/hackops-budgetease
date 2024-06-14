@@ -7,6 +7,47 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 const Page = () => {
+  const {
+    email,
+    firstName,
+    lastName,
+    password,
+    setFirstName,
+    setLastName,
+    setEmail,
+    setPassword,
+  } = useOnboardStore();
+  const route = useRouter();
+
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const emailRegex = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  const emailValidate = emailRegex.test(email);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleClick = async () => {
+    setError("");
+    setLoading(true);
+    const res = await API.post("/user/signup", {
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+
+    if (res.data) {
+      route.push("/create/email");
+    } else {
+      console.log(res.error);
+      setError(res.error);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="py-24">
       <AuthHeader />
