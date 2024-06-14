@@ -1,15 +1,52 @@
 import AuthHeader from "@/components/authHeader";
+import useOnboardStore from "@/store/onboard";
+import useUserStore from "@/store/user";
+import { API } from "@/utils/api";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 const Page = () => {
+  const route = useRouter();
+  const { email, setEmail } = useOnboardStore();
+  const { user, setUser } = useUserStore();
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = () => {};
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    const res = await API.post("/user/login", {
+      email,
+      password,
+    });
+
+    if (res.data) {
+      setUser(res.data);
+      if (res.data.budget) {
+        route.push("/dashboard");
+      } else {
+        route.push("/generate");
+      }
+    } else {
+      console.log(res?.error);
+      if (typeof res?.error === "string") {
+        setError(res?.error);
+      }
+
+      if (res?.error === "Email is not verified!") {
+        route.push("/create/email");
+      }
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="py-24">
@@ -52,8 +89,12 @@ const Page = () => {
           </Link>
 
           <div>
-            <button className="w-full py-5 rounded-lg bg-primary font-bold text-center text-white mt-6">
-              Log In
+            <p className="text-red text-center">{error}</p>
+            <button
+              disabled={loading}
+              className="w-full py-5 rounded-lg bg-primary font-bold text-center text-white mt-6"
+            >
+              {loading ? <span className="loader-small" /> : "Log In"}
             </button>
           </div>
           <p className="text-sm text-center font-medium">
