@@ -1,6 +1,34 @@
 import AuthHeader from "@/components/authHeader";
+import useOnboardStore from "@/store/onboard";
+import useUserStore from "@/store/user";
+import { API } from "@/utils/api";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
 
 const Page = () => {
+  const router = useRouter();
+  const { email, setEmail } = useOnboardStore();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    const res = await API.post("/user/send-password-link", { email });
+    if (res.data) {
+      router.push("/create/email-sent");
+    } else {
+      console.log(res.error);
+
+      setError("Incorrect credential");
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="py-24">
       <AuthHeader />
