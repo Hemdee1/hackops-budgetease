@@ -12,7 +12,15 @@ const Page = () => {
 
       <div className="w-[600px] space-y-10 mt-20 max-w-full mx-auto border-gray4 border  rounded-3xl px-5 sm:px-10 py-20">
         <div className="flex justify-center items-center">
-          <MailIcon />
+          {/* <MailIcon /> */}
+          <Image
+            src="/images/email.svg"
+            alt="email template"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="h-auto w-[450px]"
+          />
         </div>
 
         <h2 className="text-2xl font-semibold text-center">
