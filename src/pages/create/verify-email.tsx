@@ -30,6 +30,17 @@ const Page = () => {
     verifyEmail();
   }, [route]);
 
+  if (loading) {
+    return (
+      <>
+        <AuthHeader />
+        <div className="grid mt-20 h-[80vh] place-content-center">
+          <span className="!w-12 !h-12 loader"></span>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div className="py-24">
       <AuthHeader />
