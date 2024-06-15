@@ -1,6 +1,45 @@
 import AuthHeader from "@/components/authHeader";
+import useOnboardStore from "@/store/onboard";
+import useUserStore from "@/store/user";
+import { API } from "@/utils/api";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
 
 const Page = () => {
+  const router = useRouter();
+
+  const { password, setPassword } = useOnboardStore();
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = async () => {
+    setError("");
+    const token = router.query.token;
+
+    if (!token) {
+      return setError(
+        "The link is expired or invalid, please generate another link"
+      );
+    }
+
+    setLoading(true);
+
+    const res = await API.post("/user/reset-password/" + token, { password });
+
+    if (res.data) {
+      router.push("/create/password-successful");
+    } else {
+      setError(res.error);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="py-24">
       <AuthHeader />
