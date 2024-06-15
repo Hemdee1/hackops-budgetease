@@ -6,6 +6,30 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Page = () => {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const route = useRouter();
+
+  useEffect(() => {
+    const token = route.query.token;
+    if (!token) return;
+
+    const verifyEmail = async () => {
+      setLoading(true);
+
+      const res = await API.post("/user/verify-email/" + token, {});
+
+      if (res.data) {
+        setSuccess(true);
+      } else {
+        setSuccess(false);
+      }
+      setLoading(false);
+    };
+
+    verifyEmail();
+  }, [route]);
+
   return (
     <div className="py-24">
       <AuthHeader />
