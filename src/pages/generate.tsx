@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 const Page = () => {
   return (
     <div className="py-24">
+      <AuthHeader />
+
       <div className="w-[600px] mt-20 max-w-full mx-auto border-gray4 border  rounded-3xl px-5 sm:px-10 py-8">
         <div>
           <div className="h-1 w-full bg-gray3 rounded-full">
