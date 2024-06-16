@@ -1,3 +1,11 @@
+import AuthHeader from "@/components/authHeader";
+import ChangeCurrencyDropdown from "@/components/changeCurrency";
+import Header from "@/components/header";
+import ChooseBudgetModal from "@/components/modals/choose";
+import LoadingModal from "@/components/modals/loading";
+import BudgetOverviewModal from "@/components/modals/overview";
+import useFormatAmount from "@/hooks/useFormatAmount";
+import useOnboardStore from "@/store/onboard";
 import useUserStore from "@/store/user";
 import { option1, option2, option3, option4 } from "@/utils/data";
 import { useRouter } from "next/router";
@@ -159,6 +167,22 @@ const Page = () => {
           </div>
         </div>
       </div>
+
+      <LoadingModal
+        openModal={openLoadingModal}
+        setOpenModal={setOpenLoadingModal}
+        setOpenNextModal={setOpenChooseBudgetModal}
+      />
+      <ChooseBudgetModal
+        openModal={openChooseBudgetModal}
+        setOpenModal={setOpenChooseBudgetModal}
+        setOpenNextModal={setOpenBudgetOverviewModal}
+      />
+      <BudgetOverviewModal
+        openModal={openBudgetOverviewModal}
+        setOpenModal={setOpenBudgetOverviewModal}
+        setOpenPrevModal={setOpenChooseBudgetModal}
+      />
     </div>
   );
 };
