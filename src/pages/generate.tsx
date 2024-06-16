@@ -12,6 +12,49 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Page = () => {
+  const router = useRouter();
+  const { user } = useUserStore();
+  const {
+    income,
+    rent,
+    gender,
+    status,
+    transport,
+    setIncome,
+    setRent,
+    setGender,
+    setStatus,
+    setTransport,
+    setSelectedOption,
+    emptyBudget,
+  } = useOnboardStore();
+  const { formatOnly } = useFormatAmount();
+
+  const [openLoadingModal, setOpenLoadingModal] = useState(false);
+  const [openChooseBudgetModal, setOpenChooseBudgetModal] = useState(false);
+  const [openBudgetOverviewModal, setOpenBudgetOverviewModal] = useState(false);
+
+  const handleGenerate = () => {
+    if (status === "single" && transport === "public transport") {
+      setSelectedOption(option1);
+    } else if (status === "single" && transport === "private car") {
+      setSelectedOption(option2);
+    } else if (status === "married" && transport === "public transport") {
+      setSelectedOption(option3);
+    } else if (status === "married" && transport === "private car") {
+      setSelectedOption(option4);
+    }
+
+    emptyBudget();
+    setOpenLoadingModal(true);
+  };
+
+  useEffect(() => {
+    if (user === undefined) {
+      router.push("/login");
+    }
+  }, [user, router]);
+
   return (
     <div className="py-24">
       <AuthHeader />
