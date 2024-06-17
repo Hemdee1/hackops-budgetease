@@ -9,8 +9,42 @@ import CategoryModal from "@/components/modals/category";
 import EditCategoryModal from "@/components/modals/editCategory";
 import HistoryModal from "@/components/modals/history";
 import NewBudgetModal from "@/components/modals/newBugdet";
+import useFormatAmount from "@/hooks/useFormatAmount";
+import DateIcon from "@/icons/dateIcon";
+import EditIcon from "@/icons/editIcon";
+import PlusIcon from "@/icons/plusIcon";
+import useUserStore from "@/store/user";
+import { getDateInfo, getHistory, getTotal } from "@/utils/helper";
+import { useRouter } from "next/router";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const Page = () => {
+  const router = useRouter();
+  const { user } = useUserStore();
+  const { formatAmount } = useFormatAmount();
+
+  const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
+  const [openAddExpensesModal, setOpenAddExpensesModal] = useState(false);
+  const [openCategoryModal, setOpenCategoryModal] = useState(false);
+  const [openHistoryModal, setOpenHistoryModal] = useState(false);
+  const [openNewBudgetModal, setOpenNewBudgetModal] = useState(false);
+  const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
+
+  const { currentDate, month, nextMonth, nextMonthExactDate, year } =
+    getDateInfo(user?.budget?.createdAt!);
+
+  const { expensesTotal, incomeTotal, totalBalance } = getTotal(user!);
+
+  const history = getHistory(user!);
+
+  useLayoutEffect(() => {
+    if (user === undefined) {
+      router.push("/login");
+    } else if (user && !user?.budget) {
+      router.push("/generate");
+    }
+  }, [user, router]);
+
   return (
     <main className="w-fullscreen max-w-full mx-auto px-20 my-32">
       <Header />
