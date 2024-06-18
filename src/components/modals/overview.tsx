@@ -138,7 +138,8 @@ const BudgetOverviewModal = ({
       openModal={openModal}
       // closeModal={() => setOpenModal(false)}
       width="700px"
-      height="90vh"
+      height="80vh"
+      scroll
     >
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
@@ -181,9 +182,9 @@ const BudgetOverviewModal = ({
         </div>
       </div>
 
-      <h4 className="text-sm text-gray1 mt-4 text-center">
+      {/* <h4 className="text-sm text-gray1 mt-4 text-center">
         Customize the percent and the price allocated for your categories
-      </h4>
+      </h4> */}
 
       <div className="mt-3 space-y-4 h-[45vh] p-4 overflow-y-scroll">
         {calculatedBudget.map((budget, index) => (
@@ -246,7 +247,7 @@ const BudgetOverviewModal = ({
           <button
             onClick={handleCreate}
             disabled={totalPercent !== 100 || loading}
-            className="w-[90%] mx-auto py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
+            className="w-full py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
           >
             {loading ? <span className="loader-small" /> : "Create budget"}
           </button>
