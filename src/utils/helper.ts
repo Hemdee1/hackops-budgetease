@@ -72,18 +72,34 @@ export const getPoints = (user: UserType) => {
     history?.map((item) => new Date(item.createdAt).toDateString())
   ).size;
 
-  const XPPoints =
+  const expensePoints =
     history?.reduce((totalPoints, item) => {
       if (item.categoryId) {
         // It's an expense
         return totalPoints + 7;
       } else {
-        // It's an income
-        return totalPoints + 5;
+        return totalPoints;
       }
     }, 0) ?? 0;
 
-  return { flamePoints: uniqueDays, XPPoints };
+  const incomePoints =
+    history?.reduce((totalPoints, item) => {
+      if (!item.categoryId) {
+        // It's an income
+        return totalPoints + 5;
+      } else {
+        return totalPoints;
+      }
+    }, 0) ?? 0;
+
+  const totalXPPoints = expensePoints + incomePoints;
+
+  return {
+    flamePoints: uniqueDays,
+    expensePoints,
+    incomePoints,
+    totalXPPoints,
+  };
 };
 
 export const converImageToBlob = (
