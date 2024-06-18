@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Modal from "../modal";
 import useAlertStore from "@/store/alert";
 import UserIcon from "@/icons/userIcon";
@@ -22,7 +22,7 @@ const ProfileModal = ({
   const [avatar, setAvatar] = useState(user?.avatar);
 
   const [loading, setLoading] = useState(false);
-  const handleCreate = async () => {
+  const handleUpdate = async () => {
     setLoading(true);
 
     const res = await API.post("/user/update?user=true", {
@@ -49,7 +49,7 @@ const ProfileModal = ({
       closeModal={() => setOpenModal(false)}
       height="80vh"
     >
-      <h2 className="font-semibold text-gray1 text-xl">Profile</h2>
+      <h2 className="font-semibold text-gray1 text-xl">Update Profile</h2>
 
       <div className="mt-6 space-y-5">
         <div className="flex gap-4 items-center">
@@ -106,11 +106,11 @@ const ProfileModal = ({
 
         <div className="mt-4 flex justify-center">
           <button
-            onClick={handleCreate}
+            onClick={handleUpdate}
             disabled={!firstName || !lastName || loading}
-            className="w-[90%] mx-auto py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
+            className="w-full py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
           >
-            {loading ? <span className="loader-small" /> : "Save"}
+            {loading ? <span className="loader-small" /> : "Update"}
           </button>
         </div>
       </div>
