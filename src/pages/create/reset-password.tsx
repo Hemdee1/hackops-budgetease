@@ -1,8 +1,10 @@
 import AuthHeader from "@/components/authHeader";
 import useOnboardStore from "@/store/onboard";
+import useUserStore from "@/store/user";
 import { API } from "@/utils/api";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const Page = () => {
   const router = useRouter();

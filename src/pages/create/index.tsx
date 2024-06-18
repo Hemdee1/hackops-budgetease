@@ -1,4 +1,5 @@
 import AuthHeader from "@/components/authHeader";
+import Logo from "@/icons/logo";
 import useOnboardStore from "@/store/onboard";
 import { API } from "@/utils/api";
 import Link from "next/link";
