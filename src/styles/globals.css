@@ -45,3 +45,8 @@
     transform: rotate(360deg);
   }
 }
+
+/* OVERRIDE EMOJI STYLE */
+.epr_-sisw4f {
+  display: none !important;
+}
