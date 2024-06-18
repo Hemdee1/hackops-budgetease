@@ -45,6 +45,17 @@ const Page = () => {
     }
   }, [user, router]);
 
+  if (user === null) {
+    return (
+      <>
+        <AuthHeader />
+        <main className="w-fullscreen h-[60vh] grid place-content-center max-w-full mx-auto px-20 my-32">
+          <span className="loader"></span>
+        </main>
+      </>
+    );
+  }
+
   return (
     <main className="w-fullscreen max-w-full mx-auto px-20 my-32">
       <Header />
