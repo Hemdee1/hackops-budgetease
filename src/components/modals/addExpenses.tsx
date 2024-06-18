@@ -143,7 +143,7 @@ const AddExpensesModal = ({
           <button
             onClick={handleAdd}
             disabled={!value || !category || loading}
-            className="mt-5 w-[90%] mx-auto py-5 flex gap-3 items-center justify-center font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
+            className="w-full mt-5 py-5 flex gap-3 items-center justify-center font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
           >
             Add {value && formatOnly(+value)}
             {loading && <span className="loader-small"></span>}
