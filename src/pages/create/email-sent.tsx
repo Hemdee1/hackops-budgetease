@@ -9,7 +9,7 @@ const Page = () => {
     <div className="py-24">
       <AuthHeader />
 
-      <div className="w-[600px] space-y-10 mt-20 max-w-full mx-auto border-gray4 border  rounded-3xl px-5 sm:px-10 py-20">
+      <div className="w-[600px] mt-20 max-w-full mx-auto border-gray4 border  rounded-3xl px-5 sm:px-10 py-20">
         <div className="flex justify-center items-center">
           <MailIcon />
         </div>
