@@ -5,7 +5,9 @@ interface API {
 
 // const baseUrl = "http://localhost:5000";
 const baseUrl =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000";
+  process.env.NODE_ENV === "production"
+    ? "https://budgetease-backend.onrender.com"
+    : "http://localhost:5000";
 
 export const API: API = {
   async get(url: string): Promise<any> {
