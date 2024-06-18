@@ -54,7 +54,7 @@ const ChooseBudgetModal = ({
             setOpenModal(false);
           }}
           disabled={selectedBudget.length < 5}
-          className="mt-8 w-[90%] mx-auto py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
+          className="mt-8 w-full py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3"
         >
           Done
         </button>
