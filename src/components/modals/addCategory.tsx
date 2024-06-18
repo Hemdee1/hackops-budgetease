@@ -140,7 +140,7 @@ const AddNewCategoryModal = ({
         </div> */}
 
         <div className="flex justify-center">
-          <button className="mt-5 w-[90%] mx-auto py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3">
+          <button className="mt-5 w-full py-5 font-semibold text-white rounded-lg bg-primary transition-colors duration-300 disabled:bg-gray3">
             Add
           </button>
         </div>
